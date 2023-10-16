@@ -1,6 +1,5 @@
 package com.dicoding.storyapp.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.dicoding.storyapp.data.pref.UserPreference
@@ -22,8 +21,6 @@ class StoryRepository private constructor(
     private val userPreference: UserPreference,
     private val apiService: ApiService,
 ) {
-    private var userToken: String? = null
-
     fun getStories(): LiveData<Result<StoryResponse>> = liveData(Dispatchers.IO) {
         emit(Result.Loading)
 
@@ -126,12 +123,10 @@ class StoryRepository private constructor(
     }
 
     private fun getUserToken(): String {
-        if (userToken != null) return userToken as String
         val token = runBlocking {
             userPreference.getToken().first()
         }
-        userToken = "Bearer $token"
-        return userToken as String
+        return "Bearer $token"
     }
 
     companion object {

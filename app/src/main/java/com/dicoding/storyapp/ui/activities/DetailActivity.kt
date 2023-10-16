@@ -9,7 +9,6 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.dicoding.storyapp.data.Result
-import com.dicoding.storyapp.R
 import com.dicoding.storyapp.databinding.ActivityDetailBinding
 import com.dicoding.storyapp.ui.viewmodels.DetailViewModel
 import com.dicoding.storyapp.ui.viewmodels.ViewModelFactory

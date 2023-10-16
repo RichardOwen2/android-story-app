@@ -36,7 +36,7 @@
             app:srcCompat="@drawable/ic_place_holder" />
 
         <Button
-            android:id="@+id/cameraXButton"
+            android:id="@+id/camera"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -61,7 +61,7 @@
             app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
 
         <EditText
-            android:id="@+id/multilineEditText"
+            android:id="@+id/ed_add_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -71,14 +71,14 @@
             android:hint="@string/enter_your_story_description"
             android:inputType="textMultiLine"
             android:lines="7"
-            app:layout_constraintBottom_toTopOf="@+id/uploadButton"
+            app:layout_constraintBottom_toTopOf="@+id/button_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/galleryButton"
             app:layout_constraintVertical_bias="0.18" />
 
         <Button
-            android:id="@+id/uploadButton"
+            android:id="@+id/button_add"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -89,7 +89,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/multilineEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/ed_add_description" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
