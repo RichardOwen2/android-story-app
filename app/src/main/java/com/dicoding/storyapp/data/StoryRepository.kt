@@ -2,6 +2,14 @@ package com.dicoding.storyapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.dicoding.storyapp.data.local.Story
+import com.dicoding.storyapp.data.local.StoryDatabase
+import com.dicoding.storyapp.data.paging.StoryRemoteMediator
 import com.dicoding.storyapp.data.pref.UserPreference
 import com.dicoding.storyapp.data.remote.response.DetailStoryResponse
 import com.dicoding.storyapp.data.remote.response.MessageResponse
@@ -20,32 +28,24 @@ import java.io.File
 class StoryRepository private constructor(
     private val userPreference: UserPreference,
     private val apiService: ApiService,
+    private val storyDatabase: StoryDatabase
 ) {
-    fun getStories(): LiveData<Result<StoryResponse>> = liveData(Dispatchers.IO) {
-        emit(Result.Loading)
 
-        try {
-            val response = apiService.getStories(getUserToken())
-            if (response.isSuccessful) {
-                val body = response.body()
-                if (body != null && !body.error) {
-                    emit(Result.Success(body))
-                } else {
-                    emit(Result.Error("Login Failed"))
-                }
-            } else {
-                val errorBody = response.errorBody()?.string()
-                if (!errorBody.isNullOrBlank()) {
-                    val gson = Gson()
-                    val errorResponse = gson.fromJson(errorBody, MessageResponse::class.java)
-                    emit(Result.Error(errorResponse.message))
-                } else {
-                    emit(Result.Error("Register Failed"))
-                }
+    @OptIn(ExperimentalPagingApi::class)
+    fun getStories(): LiveData<PagingData<Story>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            remoteMediator = StoryRemoteMediator(
+                getUserToken(),
+                storyDatabase,
+                apiService,
+            ),
+            pagingSourceFactory = {
+                storyDatabase.storyDao().getAllStory()
             }
-        } catch (e: Exception) {
-            emit(Result.Error(e.message.toString()))
-        }
+        ).liveData
     }
 
     fun getStoriesWithLocation(): LiveData<Result<StoryResponse>> = liveData(Dispatchers.IO) {
@@ -159,10 +159,11 @@ class StoryRepository private constructor(
         private var instance: StoryRepository? = null
         fun getInstance(
             userPreference: UserPreference,
-            apiService: ApiService
+            apiService: ApiService,
+            storyDatabase: StoryDatabase
         ): StoryRepository =
             instance ?: synchronized(this) {
-                instance ?: StoryRepository(userPreference, apiService)
+                instance ?: StoryRepository(userPreference, apiService, storyDatabase)
             }.also { instance = it }
     }
 }

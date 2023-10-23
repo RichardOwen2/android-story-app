@@ -51,13 +51,15 @@ class DetailActivity : AppCompatActivity() {
                 is Result.Success -> {
                     showLoading(false)
                     with(story.data.story) {
-                        Glide.with(this@DetailActivity)
-                            .load(photoUrl)
-                            .into(binding.storyPhoto)
+                        binding.apply {
+                            Glide.with(this@DetailActivity)
+                                .load(photoUrl)
+                                .into(storyPhoto)
 
-                        binding.createdAt.text = createdAt.formatDate()
-                        binding.storyName.text = name
-                        binding.storyDescription.text = description
+                            createdAt.text = this@with.createdAt.formatDate()
+                            storyName.text = name
+                            storyDescription.text = description
+                        }
                     }
                 }
 

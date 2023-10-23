@@ -14,7 +14,7 @@
     <string name="message_login_page">Siap kembali melihat cerita hebat dicoding?</string>
     <string name="storyPhoto">story photo</string>
     <string name="content_description_media">story photo</string>
-    <string name="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle of Lorem Ipsum.</string>
     <string name="createdAt">Minggu, 08 Januari 2023</string>
     <string name="nama">Richard Owen Hoan</string>
     <string name="addButton">Tambah Story</string>
@@ -27,4 +27,6 @@
     <string name="title_activity_location">LocationActivity</string>
     <string name="include_my_location">Include My Location</string>
     <string name="empty_location_warning">Failed To Get Location</string>
+    <string name="password_length_error">Password must be at least 8 characters</string>
+    <string name="retry">Coba Lagi</string>
 </resources>

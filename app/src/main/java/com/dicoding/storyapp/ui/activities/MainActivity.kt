@@ -11,12 +11,11 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dicoding.storyapp.data.Result
 import com.dicoding.storyapp.databinding.ActivityMainBinding
+import com.dicoding.storyapp.ui.adapters.LoadingStateAdapter
 import com.dicoding.storyapp.ui.adapters.StoryAdapter
 import com.dicoding.storyapp.ui.viewmodels.MainViewModel
 import com.dicoding.storyapp.ui.viewmodels.ViewModelFactory
-import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -60,20 +59,15 @@ class MainActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvStory.addItemDecoration(itemDecoration)
 
-        viewModel.getStories().observe(this) { storyResponse ->
-            when (storyResponse) {
-                is Result.Loading -> showLoading(true)
-                is Result.Success -> {
-                    showLoading(false)
-                    binding.rvStory.adapter = StoryAdapter().apply {
-                        submitList(storyResponse.data.listStory)
-                    }
-                }
-                is Result.Error -> {
-                    showLoading(false)
-                    Snackbar.make(binding.root, storyResponse.error, Snackbar.LENGTH_SHORT).show()
-                }
+        val adapter = StoryAdapter()
+        binding.rvStory.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
             }
+        )
+
+        viewModel.stories.observe(this) {
+            adapter.submitData(lifecycle, it)
         }
     }
 
@@ -101,9 +95,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

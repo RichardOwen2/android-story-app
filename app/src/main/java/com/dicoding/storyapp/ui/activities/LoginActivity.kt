@@ -31,6 +31,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        viewModel.getSession().observe(this) { user ->
+            if (user.token != "") {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        }
+
         setupView()
         setupAction()
         playAnimation()
