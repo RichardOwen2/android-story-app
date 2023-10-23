@@ -28,6 +28,19 @@
         tools:visibility="visible"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/logout"
+        android:foregroundGravity="bottom"
+        app:fabSize="normal"
+        app:layout_anchorGravity="bottom|start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_travel_explore_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

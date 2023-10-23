@@ -5,5 +5,5 @@ import com.dicoding.storyapp.data.StoryRepository
 import java.io.File
 
 class AddViewModel(private val storyRepository: StoryRepository): ViewModel() {
-    fun addStory(description: String, photo: File, lat: String?, lon: String?)  = storyRepository.addStory(description, photo, lat, lon)
+    fun addStory(description: String, photo: File, lat: Float?, lon: Float?)  = storyRepository.addStory(description, photo, lat, lon)
 }
