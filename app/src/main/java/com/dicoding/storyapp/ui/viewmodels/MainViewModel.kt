@@ -11,7 +11,7 @@ import com.dicoding.storyapp.data.UserRepository
 import com.dicoding.storyapp.data.local.Story
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val userRepository: UserRepository, private val storyRepository: StoryRepository) : ViewModel() {
+class MainViewModel(private val userRepository: UserRepository, storyRepository: StoryRepository) : ViewModel() {
     fun getSession() = userRepository.getSession().asLiveData()
 
     fun logout() {
