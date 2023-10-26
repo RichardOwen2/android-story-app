@@ -10,7 +10,6 @@ import com.dicoding.storyapp.data.local.Story
 import com.dicoding.storyapp.data.local.StoryDatabase
 import com.dicoding.storyapp.data.remote.response.StoryResponse
 import com.dicoding.storyapp.data.remote.retrofit.ApiService
-import com.google.gson.annotations.SerializedName
 
 @OptIn(ExperimentalPagingApi::class)
 class StoryRemoteMediator(

@@ -6,7 +6,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
-import com.dicoding.storyapp.R
 
 class PasswordTextEdit : AppCompatEditText {
     constructor(context: Context) : super(context) {
